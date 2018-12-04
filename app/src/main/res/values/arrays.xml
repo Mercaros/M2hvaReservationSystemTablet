@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="news_world">
+        <item>07 Feb 2019 12:19:26</item>
+        <item>07 Feb 2019 20:00:16</item>
+    </string-array>
+    <string-array name="news_biz">
+        <item>08 Feb 2019 22:39:54</item>
+        <item>08 Feb 2019 18:38:49</item>
+    </string-array>
+</resources>

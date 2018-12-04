@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Application</string>
+
+
+
+    <string name="world_topic">Today</string>
+    <string name="biz_topic">Tomorrow</string>
+</resources>
