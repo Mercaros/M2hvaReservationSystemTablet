@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
-
-
+    <string name="app_name">M2hvaReservationSystemTablet</string>
 
     <string name="world_topic">Today</string>
     <string name="biz_topic">Tomorrow</string>
