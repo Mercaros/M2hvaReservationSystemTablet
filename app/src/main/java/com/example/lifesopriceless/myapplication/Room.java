@@ -8,6 +8,10 @@ public class Room {
     private boolean availability;
     private String time;
 
+
+    public Room() {
+    }
+
     public Room(String name, String description, String calendarID, int capacity) {
         this.name = name;
         this.description = description;
