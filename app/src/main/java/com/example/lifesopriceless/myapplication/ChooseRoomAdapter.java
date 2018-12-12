@@ -52,7 +52,17 @@ public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.My
 
         @OnClick(R.id.roomTitle)
         public void onClickRoom() {
-           //Intent to mainactivity
+            //Intent to mainactivity
+        }
+
+    }
+
+
+    public void swapList(List<Room> newList) {
+        roomList = newList;
+        if (newList != null) {
+            // Force the RecyclerView to refresh
+            notifyDataSetChanged();
         }
     }
 }

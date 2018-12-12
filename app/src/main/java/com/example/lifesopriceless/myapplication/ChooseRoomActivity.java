@@ -5,14 +5,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.lifesopriceless.myapplication.repository.RoomRepo;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class ChooseRoomActivity extends AppCompatActivity {
 
     private RecyclerView roomListView;
-    private List<Room> roomList = new ArrayList<>();
+    private List<Room> roomList;
     private ChooseRoomAdapter chooseRoomAdapter;
+    RoomRepo roomRepo = new RoomRepo(this);
 
 
     @Override
@@ -20,8 +29,7 @@ public class ChooseRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_room);
         roomListView = findViewById(R.id.recyclerView);
-        dummyData();
-        updateUI();
+        loadData();
     }
 
     private void updateUI() {
@@ -30,16 +38,33 @@ public class ChooseRoomActivity extends AppCompatActivity {
             roomListView.setLayoutManager(new LinearLayoutManager(ChooseRoomActivity.this));
             roomListView.setAdapter(chooseRoomAdapter);
         } else {
-            //Refresh list
-
+            chooseRoomAdapter.swapList(roomList);
         }
     }
 
-    private void dummyData() {
-        roomList.add(new Room("Mammut", "Hoi", "Id", 3));
-        roomList.add(new Room("Elephant", "Hoi", "Id", 3));
-        roomList.add(new Room("Hunter Room ", "Hoi", "Id", 3));
-        roomList.add(new Room("Big Meeting Room", "Hoi", "Id", 3));
+    private void loadData() {
+        Observable.just(roomRepo.getList()).subscribe(new Observer<List<Room>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(List<Room> rooms) {
+            roomList = rooms;
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+                updateUI();
+            }
+        });
 
     }
 }
+
+
