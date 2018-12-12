@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".ChooseRoomActivity"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
@@ -20,12 +20,8 @@
         </activity>
 
         <activity
-            android:name=".ChooseRoomActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            android:name=".MainActivity"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 
