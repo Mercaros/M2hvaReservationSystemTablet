@@ -1,6 +1,7 @@
 package com.example.lifesopriceless.myapplication;
 
 public class Room {
+    private String image;
     private String name;
     private String description;
     private String calendarID;
@@ -8,16 +9,25 @@ public class Room {
     private boolean availability;
     private String time;
 
+    public Room(){
 
-    public Room() {
     }
 
-    public Room(String name, String description, String calendarID, int capacity) {
+    public Room(String image, String name, String description, String calendarID, int capacity) {
+        this.image = image;
         this.name = name;
         this.description = description;
         this.calendarID = calendarID;
         this.time = "10:00";
         this.capacity = capacity;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {

@@ -19,7 +19,7 @@ import java.util.List;
 
 public abstract class Repo<T> {
     private Context context;
-    private DatabaseReference mDatabase;
+    private final DatabaseReference mDatabase;
 
     public Repo(Context context) {
         this.context = context;

@@ -42,6 +42,6 @@ public class ReservationRepo extends Repo<Reservation>{
 
     @Override
     public DatabaseReference getReference() {
-        return super.getReference();
+        return super.getReference().getDatabase().getReference("reservations");
     }
 }
