@@ -4,8 +4,8 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.example.lifesopriceless.myapplication.Room;
-import com.example.lifesopriceless.myapplication.RoomRepository;
+import com.example.lifesopriceless.myapplication.models.Room;
+import com.example.lifesopriceless.myapplication.repository.RoomRepository;
 
 import java.util.List;
 

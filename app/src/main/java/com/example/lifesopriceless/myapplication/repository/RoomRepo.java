@@ -2,21 +2,16 @@ package com.example.lifesopriceless.myapplication.repository;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.example.lifesopriceless.myapplication.Room;
+import com.example.lifesopriceless.myapplication.models.Room;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
 import timber.log.Timber;
 
 public class RoomRepo extends Repo<Room> {

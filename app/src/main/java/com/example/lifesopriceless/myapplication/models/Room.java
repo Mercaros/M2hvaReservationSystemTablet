@@ -1,4 +1,4 @@
-package com.example.lifesopriceless.myapplication;
+package com.example.lifesopriceless.myapplication.models;
 
 public class Room {
     private String image;

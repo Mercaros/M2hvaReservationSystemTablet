@@ -2,8 +2,7 @@ package com.example.lifesopriceless.myapplication.repository;
 
 import android.content.Context;
 
-import com.example.lifesopriceless.myapplication.Reservation;
-import com.example.lifesopriceless.myapplication.Room;
+import com.example.lifesopriceless.myapplication.models.Reservation;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

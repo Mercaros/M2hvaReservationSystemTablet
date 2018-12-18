@@ -1,7 +1,9 @@
-package com.example.lifesopriceless.myapplication;
+package com.example.lifesopriceless.myapplication.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.lifesopriceless.myapplication.R;
 
 
 public class MainActivity extends AppCompatActivity {

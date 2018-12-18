@@ -1,4 +1,4 @@
-package com.example.lifesopriceless.myapplication;
+package com.example.lifesopriceless.myapplication.activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -9,6 +9,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 
+import com.example.lifesopriceless.myapplication.adapters.ChooseRoomAdapter;
+import com.example.lifesopriceless.myapplication.R;
+import com.example.lifesopriceless.myapplication.models.Room;
 import com.example.lifesopriceless.myapplication.viewmodel.ChooseRoomViewModel;
 
 import java.util.List;

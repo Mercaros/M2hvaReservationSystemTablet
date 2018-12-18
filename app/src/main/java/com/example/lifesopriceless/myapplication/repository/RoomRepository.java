@@ -1,8 +1,9 @@
-package com.example.lifesopriceless.myapplication;
+package com.example.lifesopriceless.myapplication.repository;
 
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+
+import com.example.lifesopriceless.myapplication.models.Room;
 
 import java.util.ArrayList;
 import java.util.List;

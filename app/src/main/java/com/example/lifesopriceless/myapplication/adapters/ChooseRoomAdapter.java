@@ -1,4 +1,4 @@
-package com.example.lifesopriceless.myapplication;
+package com.example.lifesopriceless.myapplication.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.lifesopriceless.myapplication.R;
+import com.example.lifesopriceless.myapplication.models.Room;
+import com.example.lifesopriceless.myapplication.activities.MainActivity;
 
 import java.util.List;
 
