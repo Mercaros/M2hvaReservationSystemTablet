@@ -1,12 +1,8 @@
-package com.example.lifesopriceless.myapplication;
+package com.example.lifesopriceless.myapplication.models;
 
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.support.annotation.NonNull;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 @TargetApi(Build.VERSION_CODES.O)
 public class Reservation {

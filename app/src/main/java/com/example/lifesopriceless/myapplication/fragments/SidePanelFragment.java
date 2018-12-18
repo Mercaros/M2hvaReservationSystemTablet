@@ -1,4 +1,4 @@
-package com.example.lifesopriceless.myapplication;
+package com.example.lifesopriceless.myapplication.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.example.lifesopriceless.myapplication.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
