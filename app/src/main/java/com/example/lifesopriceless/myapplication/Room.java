@@ -9,12 +9,7 @@ public class Room {
     private boolean availability;
     private String time;
 
-    public Room(){
-
-    }
-
-    public Room(String image, String name, String description, String calendarID, int capacity) {
-        this.image = image;
+    public Room(String name) {
         this.name = name;
         this.description = description;
         this.calendarID = calendarID;

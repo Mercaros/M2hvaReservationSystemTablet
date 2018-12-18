@@ -1,5 +1,7 @@
 package com.example.lifesopriceless.myapplication;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,16 +10,16 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.MyViewHolder> {
 
     private List<Room> roomList;
+    private final Context mContext;
 
-    public ChooseRoomAdapter(List<Room> roomList) {
+
+    public ChooseRoomAdapter(List<Room> roomList, Context context) {
         this.roomList = roomList;
+        mContext = context;
     }
 
     @Override
@@ -33,6 +35,14 @@ public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.My
         Room room = roomList.get(position);
         holder.title.setText(room.getName());
 
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MainActivity.class);
+                //intent.putExtra(NOTE_ID_KEY, note.getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -41,28 +51,11 @@ public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.roomTitle)
-        TextView title;
+        public TextView title;
 
-        public MyViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-
-        }
-
-        @OnClick(R.id.roomTitle)
-        public void onClickRoom() {
-            //Intent to mainactivity
-        }
-
-    }
-
-
-    public void swapList(List<Room> newList) {
-        roomList = newList;
-        if (newList != null) {
-            // Force the RecyclerView to refresh
-            notifyDataSetChanged();
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.roomTitle);
         }
     }
 }
