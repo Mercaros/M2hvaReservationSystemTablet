@@ -9,6 +9,10 @@ public class Room {
     private boolean availability;
     private String time;
 
+
+
+    public Room(){}
+
     public Room(String name) {
         this.name = name;
         this.description = description;
@@ -73,4 +77,17 @@ public class Room {
         this.time = time;
     }
 
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "image='" + image + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", calendarID='" + calendarID + '\'' +
+                ", capacity=" + capacity +
+                ", availability=" + availability +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }
