@@ -12,13 +12,12 @@ import java.util.List;
 public class ChooseRoomViewModel extends ViewModel {
 
     private RoomRepository mRepository = new RoomRepository();
-    private LiveData<List<Room>> rooms;
+    private MutableLiveData<List<Room>> rooms;
 
     public void init() {
         if (this.rooms != null) {
             return;
         }
-        rooms = new MutableLiveData<>();
         rooms = mRepository.getRooms();
     }
 

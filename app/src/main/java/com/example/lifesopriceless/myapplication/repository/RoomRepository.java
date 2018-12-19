@@ -20,12 +20,12 @@ public class RoomRepository {
     private DatabaseReference myRef;
 
 
+
     public RoomRepository() {
         database = FirebaseDatabase.getInstance();
-
     }
 
-    public LiveData<List<Room>> getRooms() {
+    public MutableLiveData<List<Room>> getRooms() {
         myRef = database.getReference("rooms");
         final MutableLiveData<List<Room>> data = new MutableLiveData<>();
         final List<Room> list = new ArrayList<>();
