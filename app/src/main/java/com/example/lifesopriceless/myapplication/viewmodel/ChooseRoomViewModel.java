@@ -11,17 +11,15 @@ import java.util.List;
 
 public class ChooseRoomViewModel extends ViewModel {
 
-
-    private RoomRepository mRepo;
-    private MutableLiveData<List<Room>> rooms;
-
+    private RoomRepository mRepository = new RoomRepository();
+    private LiveData<List<Room>> rooms;
 
     public void init() {
-        if (rooms != null) {
+        if (this.rooms != null) {
             return;
         }
-        mRepo = RoomRepository.getInstance();
-        rooms = mRepo.getRooms();
+        rooms = new MutableLiveData<>();
+        rooms = mRepository.getRooms();
     }
 
     public LiveData<List<Room>> getRooms() {

@@ -36,17 +36,18 @@ public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Room room = roomList.get(position);
+        final Room room = roomList.get(position);
         holder.title.setText(room.getName());
 
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MainActivity.class);
-                //intent.putExtra(NOTE_ID_KEY, note.getId());
+                intent.putExtra("room_name", room.getName());
                 mContext.startActivity(intent);
             }
         });
+
     }
 
     @Override

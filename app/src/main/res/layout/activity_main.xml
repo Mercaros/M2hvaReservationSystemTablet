@@ -4,44 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/meetingkamertje"
     android:baselineAligned="false"
+    android:gravity="top|center"
     android:orientation="vertical"
     tools:context=".activities.MainActivity">
-
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/holo_orange_light">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TEST"/>
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+    <TextView
+        android:id="@+id/mp_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="Mammut"
+        android:textColor="@android:color/white"
+        android:textSize="50sp" />
 
-        <fragment
-            android:id="@+id/side_panel"
-            android:name="com.example.lifesopriceless.myapplication.fragments.SidePanelFragment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            tools:layout="@layout/fragment_side_panel" />
+    <TextView
+        android:id="@+id/mp_availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:text="Available until 12:00"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
 
-        <fragment
-            android:id="@+id/main_panel"
-            android:name="com.example.lifesopriceless.myapplication.fragments.MainPanelFragment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            tools:layout="@layout/fragment_main_panel" />
-
-    </LinearLayout>
 
 </LinearLayout>

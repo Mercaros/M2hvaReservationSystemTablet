@@ -5,25 +5,40 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
-
-import com.example.lifesopriceless.myapplication.adapters.ChooseRoomAdapter;
 import com.example.lifesopriceless.myapplication.R;
+import com.example.lifesopriceless.myapplication.adapters.ChooseRoomAdapter;
 import com.example.lifesopriceless.myapplication.models.Room;
 import com.example.lifesopriceless.myapplication.viewmodel.ChooseRoomViewModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class ChooseRoomActivity extends AppCompatActivity {
+    private static final String TAG = "Rtesting";
     private ChooseRoomViewModel mViewModel;
 
-    private RecyclerView mRecyclerView;
-    private ChooseRoomAdapter mAdapter;
-    private LinearLayoutManager mLayoutManager;
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
 
+    private ChooseRoomAdapter mAdapter;
+
+
+    private List<Room> roomsData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,29 +46,46 @@ public class ChooseRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_room);
 
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mViewModel = ViewModelProviders.of(this).get(ChooseRoomViewModel.class);
-        mViewModel.init();
-
-        mViewModel.getRooms().observe(this, new Observer<List<Room>>() {
-            @Override
-            public void onChanged(@Nullable List<Room> rooms) {
-                mAdapter.notifyDataSetChanged();
-            }
-        });
+        ButterKnife.bind(this);
 
         initRecyclerView();
+        initViewModel();
+    }
+
+    private void initViewModel() {
+        final Observer<List<Room>> notesObserver = new Observer<List<Room>>() {
+            @Override
+            public void onChanged(@Nullable List<Room> notes) {
+                roomsData.clear();
+                roomsData.addAll(notes);
 
 
+                if (mAdapter == null) {
+                    mAdapter = new ChooseRoomAdapter(roomsData, ChooseRoomActivity.this);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                } else {
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        };
+
+        mViewModel = ViewModelProviders.of(this).get(ChooseRoomViewModel.class);
+        mViewModel.init();
+        mViewModel.getRooms().observe(this, notesObserver);
     }
 
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new ChooseRoomAdapter(mViewModel.getRooms().getValue(), ChooseRoomActivity.this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        DividerItemDecoration divider = new DividerItemDecoration(
+                mRecyclerView.getContext(), layoutManager.getOrientation());
+
+        mRecyclerView.addItemDecoration(divider);
     }
+
 }
 
 
