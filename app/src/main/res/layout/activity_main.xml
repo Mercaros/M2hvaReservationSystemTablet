@@ -27,5 +27,11 @@
         android:textColor="@android:color/white"
         android:textSize="50sp" />
 
+    <TextView
+        android:id="@+id/mp_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
 
 </LinearLayout>

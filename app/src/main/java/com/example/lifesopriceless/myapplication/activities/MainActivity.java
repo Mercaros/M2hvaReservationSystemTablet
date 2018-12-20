@@ -20,8 +20,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.lifesopriceless.myapplication.R;
+import com.example.lifesopriceless.myapplication.models.Reservation;
 import com.example.lifesopriceless.myapplication.models.Room;
 import com.example.lifesopriceless.myapplication.viewmodel.MainActivityViewModel;
+import com.google.android.gms.common.util.Strings;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +32,9 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.mp_title)
     TextView mTextViewTitle;
+
+    @BindView(R.id.mp_status)
+    TextView mTextViewStatus;
 
     @BindView(R.id.background)
     LinearLayout layout;
@@ -61,6 +66,18 @@ public class MainActivity extends AppCompatActivity {
                 toolbar.setTitle(room.getName());
                 setSupportActionBar(toolbar);
                 mTextViewTitle.setText(room.getName());
+            }
+        });
+
+        mViewModel.getRoomStatus().observe(this, new Observer<Reservation>() {
+            @Override
+            public void onChanged(@Nullable Reservation reservation) {
+
+                if (!Strings.isEmptyOrWhitespace(reservation.getId())){
+                    mTextViewStatus.setText("Occupied");
+                }else{
+                    mTextViewStatus.setText("Available");
+                }
             }
         });
     }
