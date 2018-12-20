@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,9 +20,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.lifesopriceless.myapplication.DateUtils;
 import com.example.lifesopriceless.myapplication.R;
 import com.example.lifesopriceless.myapplication.models.Reservation;
 import com.example.lifesopriceless.myapplication.models.Room;
+import com.example.lifesopriceless.myapplication.repository.ReservationRepository;
 import com.example.lifesopriceless.myapplication.viewmodel.MainActivityViewModel;
 import com.google.android.gms.common.util.Strings;
 
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.mp_status)
     TextView mTextViewStatus;
+
+    @BindView(R.id.mp_endTime)
+    TextView mTextViewEndTime;
 
     @BindView(R.id.background)
     LinearLayout layout;
@@ -68,18 +74,18 @@ public class MainActivity extends AppCompatActivity {
                 mTextViewTitle.setText(room.getName());
             }
         });
-
         mViewModel.getRoomStatus().observe(this, new Observer<Reservation>() {
             @Override
             public void onChanged(@Nullable Reservation reservation) {
-
                 if (!Strings.isEmptyOrWhitespace(reservation.getId())){
                     mTextViewStatus.setText("Occupied");
+                    mTextViewEndTime.setText("Until: " + reservation.getEndTime());
                 }else{
                     mTextViewStatus.setText("Available");
                 }
             }
         });
+
     }
 
     private void setBackgroundImage(String image_url) {

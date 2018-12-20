@@ -4,6 +4,7 @@ package com.example.lifesopriceless.myapplication.repository;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
+import com.example.lifesopriceless.myapplication.DateUtils;
 import com.example.lifesopriceless.myapplication.models.Reservation;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,44 +12,43 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.concurrent.Executor;
 
 public class ReservationRepository {
-    private FirebaseDatabase database;
+    private final FirebaseDatabase database;
     private DatabaseReference myRef;
+    private Executor executor;
 
 
     public ReservationRepository() {
         database = FirebaseDatabase.getInstance();
+
     }
 
-    public MutableLiveData<Reservation> getReservation() {
-
-        String date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
-
-        myRef = database.getReference("reservations");
+    public MutableLiveData<Reservation> getReservation(final String roomName) {
         final MutableLiveData<Reservation> data = new MutableLiveData<>();
+        myRef = database.getReference("reservations");
 
-
-
-        // Read from the database
-        myRef.orderByChild("date").equalTo("20-12-2018").addValueEventListener(new ValueEventListener() {
+        myRef.orderByChild("startTime").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (snapshot.child("reservationRoom").child("name").getValue().equals(roomName)) {
+                        Log.d("hallo", "onDataChange: " + snapshot.getValue(Reservation.class));
 
-                    if (snapshot.child("reservationRoom").child("name").getValue().equals("Zoo")) {
-                        data.setValue(snapshot.getValue(Reservation.class));
-                        //Log.d("hallo", "onDataChange: " + snapshot.getValue(Reservation.class));
+                        if (DateUtils.isNowInInterval(
+                                snapshot.getValue(Reservation.class).getStartTime(),
+                                snapshot.getValue(Reservation.class).getEndTime())) {
+                            Log.d("hallo", "currentReservation: " + snapshot.getValue(Reservation.class));
+                            data.setValue(snapshot.getValue(Reservation.class));
+
+                        } else {
+                            data.setValue(new Reservation());
+                        }
                     }
                 }
-                Log.d("hallo", "onDataChange: -------------------------------------");
-                //data.setValue(list);
+
             }
 
             @Override

@@ -1,7 +1,6 @@
 package com.example.lifesopriceless.myapplication.viewmodel;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.example.lifesopriceless.myapplication.models.Reservation;
@@ -24,10 +23,8 @@ public class MainActivityViewModel extends ViewModel {
         if (this.room != null) {
             return;
         }
-        room = new MutableLiveData<>();
-        currentReservation = new MutableLiveData<>();
-        currentReservation = mReservationRepository.getReservation();
         room = mRoomRepository.getRoom(roomName);
+        currentReservation = mReservationRepository.getReservation(roomName);
     }
 
     public LiveData<Room> getRoom() {
