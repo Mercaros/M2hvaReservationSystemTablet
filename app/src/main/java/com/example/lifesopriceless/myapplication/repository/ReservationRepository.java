@@ -13,34 +13,36 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class ReservationRepository {
     private final FirebaseDatabase database;
     private DatabaseReference myRef;
     private Executor executor;
+    private String currentTime;
 
 
     public ReservationRepository() {
         database = FirebaseDatabase.getInstance();
-
+        executor = Executors.newSingleThreadExecutor();
     }
 
     public MutableLiveData<Reservation> getReservation(final String roomName) {
-        final MutableLiveData<Reservation> data = new MutableLiveData<>();
+        currentTime();
         myRef = database.getReference("reservations");
+        final MutableLiveData<Reservation> data = new MutableLiveData<>();
 
-        myRef.orderByChild("startTime").addValueEventListener(new ValueEventListener() {
+
+        myRef.orderByChild("reservationRoom/name").equalTo(roomName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    if (snapshot.child("reservationRoom").child("name").getValue().equals(roomName)) {
-                        Log.d("hallo", "onDataChange: " + snapshot.getValue(Reservation.class));
+                    if (DateUtils.getCurrentDate().equalsIgnoreCase(snapshot.getValue(Reservation.class).getDate())) {
 
-                        if (DateUtils.isNowInInterval(
+                        if (DateUtils.isHourInInterval(currentTime,
                                 snapshot.getValue(Reservation.class).getStartTime(),
                                 snapshot.getValue(Reservation.class).getEndTime())) {
-                            Log.d("hallo", "currentReservation: " + snapshot.getValue(Reservation.class));
                             data.setValue(snapshot.getValue(Reservation.class));
 
                         } else {
@@ -48,7 +50,6 @@ public class ReservationRepository {
                         }
                     }
                 }
-
             }
 
             @Override
@@ -61,5 +62,24 @@ public class ReservationRepository {
         return data;
     }
 
+    private void currentTime() {
 
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        currentTime = DateUtils.getCurrentHour();
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        });
+
+
+    }
 }

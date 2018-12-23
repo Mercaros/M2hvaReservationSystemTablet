@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     mTextViewEndTime.setText("Until: " + reservation.getEndTime());
                 }else{
                     mTextViewStatus.setText("Available");
+                    mTextViewEndTime.setText("");
                 }
             }
         });

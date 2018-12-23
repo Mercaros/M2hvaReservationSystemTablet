@@ -20,6 +20,15 @@ public class DateUtils {
         return hour;
     }
 
+    public static String getCurrentDate() {
+        TimeZone timeZone = TimeZone.getTimeZone(TIMEZONE_FORMAT);
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdfHour = new SimpleDateFormat("dd-MM-yyyy");
+        sdfHour.setTimeZone(timeZone);
+        String date = sdfHour.format(cal.getTime());
+        return date;
+    }
+
 
     public static boolean isHourInInterval(String target, String start, String end) {
         return ((target.compareTo(start) >= 0)

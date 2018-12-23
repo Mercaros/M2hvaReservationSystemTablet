@@ -17,8 +17,6 @@ public class MainActivityViewModel extends ViewModel {
     private LiveData<Reservation> currentReservation;
 
 
-
-
     public void init(String roomName) {
         if (this.room != null) {
             return;
