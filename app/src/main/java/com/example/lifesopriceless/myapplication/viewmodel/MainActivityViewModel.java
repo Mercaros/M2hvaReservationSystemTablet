@@ -1,30 +1,35 @@
 package com.example.lifesopriceless.myapplication.viewmodel;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.util.Log;
 
+import com.example.lifesopriceless.myapplication.models.Reservation;
 import com.example.lifesopriceless.myapplication.models.Room;
+import com.example.lifesopriceless.myapplication.repository.ReservationRepository;
 import com.example.lifesopriceless.myapplication.repository.RoomRepository;
-
-import java.util.List;
 
 public class MainActivityViewModel extends ViewModel {
 
-    private RoomRepository mRepository = new RoomRepository();
+    private RoomRepository mRoomRepository = new RoomRepository();
+    private ReservationRepository mReservationRepository = new ReservationRepository();
+
     private LiveData<Room> room;
+    private LiveData<Reservation> currentReservation;
+
 
     public void init(String roomName) {
         if (this.room != null) {
             return;
         }
-        room = new MutableLiveData<>();
-
-        room = mRepository.getRoom(roomName);
+        room = mRoomRepository.getRoom(roomName);
+        currentReservation = mReservationRepository.getReservation(roomName);
     }
 
     public LiveData<Room> getRoom() {
         return room;
+    }
+
+    public LiveData<Reservation> getRoomStatus() {
+        return currentReservation;
     }
 }

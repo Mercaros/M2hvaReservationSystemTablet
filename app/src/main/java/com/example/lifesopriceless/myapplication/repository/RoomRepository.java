@@ -59,7 +59,8 @@ public class RoomRepository {
     public LiveData<Room> getRoom(final String roomName) {
         myRef = database.getReference("rooms");
         final MutableLiveData<Room> data = new MutableLiveData<>();
-        // Read from the database
+
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

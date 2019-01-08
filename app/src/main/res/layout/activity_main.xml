@@ -23,9 +23,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="top|center"
-        android:text="Mammut"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/holo_red_dark"
         android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/mp_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="24sp"
+        android:text="Available"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mp_endTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|center"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 
 </LinearLayout>

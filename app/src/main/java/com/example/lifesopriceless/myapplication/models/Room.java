@@ -13,14 +13,6 @@ public class Room {
 
     public Room(){}
 
-    public Room(String name) {
-        this.name = name;
-        this.description = description;
-        this.calendarID = calendarID;
-        this.time = "10:00";
-        this.capacity = capacity;
-    }
-
     public String getImage() {
         return image;
     }

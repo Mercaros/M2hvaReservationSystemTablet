@@ -10,15 +10,15 @@ import com.example.lifesopriceless.myapplication.repository.RoomRepository;
 import java.util.List;
 
 public class ChooseRoomViewModel extends ViewModel {
-
-    private RoomRepository mRepository = new RoomRepository();
     private MutableLiveData<List<Room>> rooms;
+    private RoomRepository mRoomRepository = new RoomRepository();
+
 
     public void init() {
         if (this.rooms != null) {
             return;
         }
-        rooms = mRepository.getRooms();
+        rooms = mRoomRepository.getRooms();
     }
 
     public LiveData<List<Room>> getRooms() {
