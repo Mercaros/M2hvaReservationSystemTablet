@@ -1,7 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <!--<color name="colorAccent">#D81B60</color>-->
     <color name="colorLaunchScreen">#3CA0F0</color>
+
+    <color name="colorOrange">#FFAA41</color>
+    <color name="colorOrangeDark">#F57F17</color>
+    <color name="colorBlue">#3CA0F0</color>
+    <color name="colorBlueDark">#0072bd</color>
+
+    <color name="colorWhite">#F7F8F9</color>
+    <color name="colorLightGrey">#949595</color>
+    <color name="colorGrey">#3C4146</color>
+    <color name="colorBlack">#231F20</color>
+
+    <!-- Main App color scheme -->
+    <color name="colorPrimary">#FFAA41</color>
+    <color name="colorPrimaryVariant">#F38D10</color>
+    <color name="colorOnPrimary">@color/white_87</color>
+    <color name="colorSecondary">#3ca0f0</color>
+    <color name="colorSecondaryVariant">#0679d9</color>
+    <color name="colorOnSecondary">@color/white_87</color>
+    <color name="colorBackground">#f7f8f9</color>
+    <color name="colorOnBackground">@color/black_87</color>
+    <color name="colorSurface">@color/white</color>
+    <color name="colorOnSurface">@color/black_87</color>
+    <color name="colorError">#b00020</color>
+    <color name="colorOnError">@color/white_87</color>
+
+    <!-- Basic colors -->
+    <color name="black">#000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_54">#8a000000</color>
+    <color name="black_65">#a6000000</color>
+    <color name="black_87">#dd000000</color>
+    <color name="white">#ffffff</color>
+    <color name="white_50">#80ffffff</color>
+    <color name="white_54">#8affffff</color>
+    <color name="white_65">#a6ffffff</color>
+    <color name="white_87">#ddffffff</color>
+
+    <color name="room_available_light">#32ac49</color>
+    <color name="room_available_dark">#003b16</color>
+
+    <color name="room_booked_light">#c23434</color>
+    <color name="room_booked_dark">#4d0000</color>
 </resources>

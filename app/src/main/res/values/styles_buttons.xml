@@ -1,0 +1,23 @@
+<resources>
+
+    <style name="btnNormal" parent="@style/Widget.MaterialComponents.Button">
+
+    </style>
+
+    <style name="btnNormal.primary" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="btnText" parent="@style/Widget.MaterialComponents.Button.TextButton">
+
+    </style>
+
+    <style name="btnOutline" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+
+    </style>
+
+    <style name="QuickReserveButton">
+        <item name="android:background">@color/colorOrange</item>
+    </style>
+
+</resources>
