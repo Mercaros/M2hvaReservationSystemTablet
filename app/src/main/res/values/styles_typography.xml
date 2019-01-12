@@ -1,0 +1,68 @@
+<resources>
+
+    <!-- Headlines -->
+    <style name="text_headline">
+        <item name="android:fontFamily">@font/header_font</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+    </style>
+
+    <style name="h1" parent="text_headline">
+        <item name="android:textSize">96sp</item>
+    </style>
+
+    <style name="h2" parent="text_headline">
+        <item name="android:textSize">60sp</item>
+    </style>
+
+    <style name="h3" parent="text_headline">
+        <item name="android:textSize">48sp</item>
+    </style>
+
+    <style name="h4" parent="text_headline">
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="h5" parent="text_headline">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="h6" parent="text_headline">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- Other -->
+    <style name="text_default">
+        <item name="android:textColor">@color/colorOnBackground</item>
+    </style>
+
+    <style name="subtitle1" parent="text_default">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="subtitle2" parent="text_default">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="body1" parent="text_default">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="body2" parent="text_default">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="button" parent="text_default">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="caption" parent="text_default">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="overline" parent="text_default">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+</resources>

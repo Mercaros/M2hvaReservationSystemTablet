@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/colorLaunchScreen" />
     <item
-        android:drawable="@drawable/ic_m2mobi_logo_black_vertical"
+        android:drawable="@drawable/m2mobi_logo_white_vertical"
         android:scaleType="fitXY"
         android:height="140dp"
         android:width="140dp"

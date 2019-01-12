@@ -8,20 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.example.lifesopriceless.myapplication.R;
 import com.example.lifesopriceless.myapplication.adapters.ChooseRoomAdapter;
 import com.example.lifesopriceless.myapplication.models.Room;
 import com.example.lifesopriceless.myapplication.viewmodel.ChooseRoomViewModel;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,7 +37,7 @@ public class ChooseRoomActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_room);
+        setContentView(R.layout.activity_room_selection);
 
         ButterKnife.bind(this);
 

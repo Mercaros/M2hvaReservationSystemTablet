@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.lifesopriceless.myapplication.R;
+import com.example.lifesopriceless.myapplication.activities.RoomActivity;
 import com.example.lifesopriceless.myapplication.models.Room;
-import com.example.lifesopriceless.myapplication.activities.MainActivity;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.room_list_row, parent, false);
+                .inflate(R.layout.row_room_list, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -38,11 +38,10 @@ public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.My
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Room room = roomList.get(position);
         holder.title.setText(room.getName());
-
-        holder.title.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, MainActivity.class);
+                Intent intent = new Intent(mContext, RoomActivity.class);
                 intent.putExtra("room_name", room.getName());
                 mContext.startActivity(intent);
             }
@@ -62,5 +61,6 @@ public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.My
             super(itemView);
             title = itemView.findViewById(R.id.roomTitle);
         }
+
     }
 }
