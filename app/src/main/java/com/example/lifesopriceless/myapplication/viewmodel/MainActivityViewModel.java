@@ -10,8 +10,6 @@ import com.example.lifesopriceless.myapplication.repository.RoomRepository;
 
 public class MainActivityViewModel extends ViewModel {
 
-    private RoomRepository mRoomRepository = new RoomRepository();
-    private ReservationRepository mReservationRepository = new ReservationRepository();
 
     private LiveData<Room> room;
     private LiveData<Reservation> currentReservation;
@@ -21,6 +19,9 @@ public class MainActivityViewModel extends ViewModel {
         if (this.room != null) {
             return;
         }
+        RoomRepository mRoomRepository = new RoomRepository();
+        ReservationRepository mReservationRepository = new ReservationRepository();
+
         room = mRoomRepository.getRoom(roomName);
         currentReservation = mReservationRepository.getReservation(roomName);
     }

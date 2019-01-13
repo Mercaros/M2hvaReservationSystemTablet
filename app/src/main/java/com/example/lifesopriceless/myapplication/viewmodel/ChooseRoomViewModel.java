@@ -1,28 +1,24 @@
 package com.example.lifesopriceless.myapplication.viewmodel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
 
 import com.example.lifesopriceless.myapplication.models.Room;
 import com.example.lifesopriceless.myapplication.repository.RoomRepository;
 
 import java.util.List;
 
-public class ChooseRoomViewModel extends ViewModel {
-    private MutableLiveData<List<Room>> rooms;
-    private RoomRepository mRoomRepository = new RoomRepository();
+public class ChooseRoomViewModel extends AndroidViewModel {
+    private LiveData<List<Room>> rooms;
 
-
-    public void init() {
-        if (this.rooms != null) {
-            return;
-        }
+    public ChooseRoomViewModel(@NonNull Application application) {
+        super(application);
+        RoomRepository mRoomRepository = new RoomRepository();
         rooms = mRoomRepository.getRooms();
     }
-
     public LiveData<List<Room>> getRooms() {
         return rooms;
     }
-
 }

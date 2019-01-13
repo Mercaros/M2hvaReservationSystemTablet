@@ -14,24 +14,17 @@ import com.example.lifesopriceless.myapplication.adapters.ChooseRoomAdapter;
 import com.example.lifesopriceless.myapplication.models.Room;
 import com.example.lifesopriceless.myapplication.viewmodel.ChooseRoomViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ChooseRoomActivity extends AppCompatActivity {
-    private static final String TAG = "Rtesting";
-    private ChooseRoomViewModel mViewModel;
-
+public class ChooseRoomActivity extends AppCompatActivity implements ChooseRoomAdapter.ItemClickListener {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
     private ChooseRoomAdapter mAdapter;
-
-
-    private List<Room> roomsData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,39 +39,30 @@ public class ChooseRoomActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        final Observer<List<Room>> notesObserver = new Observer<List<Room>>() {
+        ChooseRoomViewModel viewModel = ViewModelProviders.of(this).get(ChooseRoomViewModel.class);
+        viewModel.getRooms().observe(this, new Observer<List<Room>>() {
             @Override
-            public void onChanged(@Nullable List<Room> notes) {
-                roomsData.clear();
-                roomsData.addAll(notes);
-
-
-                if (mAdapter == null) {
-                    mAdapter = new ChooseRoomAdapter(roomsData, ChooseRoomActivity.this);
-                    mRecyclerView.setAdapter(mAdapter);
-
-                } else {
-                    mAdapter.notifyDataSetChanged();
-                }
+            public void onChanged(@Nullable List<Room> rooms) {
+                mAdapter.setRooms(rooms);
             }
-        };
-
-        mViewModel = ViewModelProviders.of(this).get(ChooseRoomViewModel.class);
-        mViewModel.init();
-        mViewModel.getRooms().observe(this, notesObserver);
+        });
     }
 
     private void initRecyclerView() {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new ChooseRoomAdapter(this, this);
+        mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration divider = new DividerItemDecoration(
-                mRecyclerView.getContext(), layoutManager.getOrientation());
-
+                getApplicationContext(), DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(divider);
     }
 
+    @Override
+    public void onItemClickListener(int itemId) {
+    }
 }
 
 

@@ -1,4 +1,4 @@
-package com.example.lifesopriceless.myapplication;
+package com.example.lifesopriceless.myapplication.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,8 +16,7 @@ public class DateUtils {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdfHour = new SimpleDateFormat(HOUR_FORMAT);
         sdfHour.setTimeZone(timeZone);
-        String hour = sdfHour.format(cal.getTime());
-        return hour;
+        return sdfHour.format(cal.getTime());
     }
 
     public static String getCurrentDate() {
@@ -25,8 +24,7 @@ public class DateUtils {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdfHour = new SimpleDateFormat("dd-MM-yyyy");
         sdfHour.setTimeZone(timeZone);
-        String date = sdfHour.format(cal.getTime());
-        return date;
+        return sdfHour.format(cal.getTime());
     }
 
 

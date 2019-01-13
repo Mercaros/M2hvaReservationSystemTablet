@@ -49,12 +49,6 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.background)
     ImageView mBackground;
 
-//    @BindView(R.id.toolbar)
-//    Toolbar toolbar;
-
-
-    private MainActivityViewModel mViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,19 +61,17 @@ public class RoomActivity extends AppCompatActivity {
 
     private void initViewModel() {
         Bundle extras = getIntent().getExtras();
-        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
-        mViewModel.init(extras.getString("room_name"));
-        mViewModel.getRoom().observe(this, new Observer<Room>() {
+        MainActivityViewModel viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        viewModel.init(extras.getString("room_name"));
+        viewModel.getRoom().observe(this, new Observer<Room>() {
             @Override
             public void onChanged(@Nullable Room room) {
                 setBackgroundImage(room);
 
-//                toolbar.setTitle(room.getName());
-//                setSupportActionBar(toolbar);
                 mTextViewTitle.setText(room.getName());
             }
         });
-        mViewModel.getRoomStatus().observe(this, new Observer<Reservation>() {
+        viewModel.getRoomStatus().observe(this, new Observer<Reservation>() {
             @Override
             public void onChanged(@Nullable Reservation reservation) {
                 if (!Strings.isEmptyOrWhitespace(reservation.getId())) {

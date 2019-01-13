@@ -14,16 +14,20 @@ import com.example.lifesopriceless.myapplication.models.Room;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.MyViewHolder> {
 
-    private List<Room> roomList;
-    private final Context mContext;
+    private List<Room> mRoomList;
+    private Context mContext;
+    final private ItemClickListener mItemClickListener;
 
 
-    public ChooseRoomAdapter(List<Room> roomList, Context context) {
-        this.roomList = roomList;
+    public ChooseRoomAdapter(Context context, ItemClickListener itemClickListener) {
         mContext = context;
+        mItemClickListener = itemClickListener;
     }
 
     @Override
@@ -36,7 +40,7 @@ public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Room room = roomList.get(position);
+        final Room room = mRoomList.get(position);
         holder.title.setText(room.getName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,16 +55,35 @@ public class ChooseRoomAdapter extends RecyclerView.Adapter<ChooseRoomAdapter.My
 
     @Override
     public int getItemCount() {
-        return roomList.size();
+        if (mRoomList == null) {
+            return 0;
+        }
+        return mRoomList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
+    public List<Room> getRooms() {
+        return mRoomList;
+    }
+
+    public void setRooms(List<Room> roomsData) {
+        mRoomList = roomsData;
+        notifyDataSetChanged();
+    }
+
+    public interface ItemClickListener {
+        void onItemClickListener(int itemId);
+    }
+
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.roomTitle)
+        TextView title;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.roomTitle);
+            ButterKnife.bind(this, itemView);
         }
+
 
     }
 }
