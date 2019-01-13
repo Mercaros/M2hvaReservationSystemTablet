@@ -6,7 +6,6 @@ import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
 import com.example.lifesopriceless.myapplication.models.Room;
-import com.example.lifesopriceless.myapplication.utils.DateUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,8 +14,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class RoomRepository {
     private FirebaseDatabase database;
@@ -65,8 +62,6 @@ public class RoomRepository {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (snapshot.child("name").getValue().equals(roomName)) {

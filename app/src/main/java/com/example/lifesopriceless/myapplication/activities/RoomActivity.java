@@ -49,6 +49,8 @@ public class RoomActivity extends AppCompatActivity {
     @BindView(R.id.background)
     ImageView mBackground;
 
+    Room mRoom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +68,7 @@ public class RoomActivity extends AppCompatActivity {
         viewModel.getRoom().observe(this, new Observer<Room>() {
             @Override
             public void onChanged(@Nullable Room room) {
-                setBackgroundImage(room);
-
+                mRoom = room;
                 mTextViewTitle.setText(room.getName());
             }
         });
@@ -75,9 +76,11 @@ public class RoomActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Reservation reservation) {
                 if (!Strings.isEmptyOrWhitespace(reservation.getId())) {
+                    setBackgroundImage(mRoom, true);
                     mTextViewStatus.setText("Occupied");
                     mTextViewEndTime.setText("Until: " + reservation.getEndTime());
                 } else {
+                    setBackgroundImage(mRoom, false);
                     mTextViewStatus.setText("Available");
                     mTextViewEndTime.setText("");
                 }
@@ -86,14 +89,14 @@ public class RoomActivity extends AppCompatActivity {
 
     }
 
-    private void setBackgroundImage(Room room) {
+    private void setBackgroundImage(Room room, Boolean b) {
         Glide.with(getBaseContext())
                 .load(room.getImage())
                 .apply(bitmapTransform(new GrayscaleTransformation()))
                 .into(new DrawableImageViewTarget(mRoomAvatar));
 
         ColorFilter cf;
-        if (room.isAvailable()) {
+        if (!b) {
             cf = duotoneColorFilter(getColor(R.color.room_available_dark), getColor(R.color.room_available_light), 0);
         } else {
             cf = duotoneColorFilter(getColor(R.color.room_booked_dark), getColor(R.color.room_booked_light), 0);

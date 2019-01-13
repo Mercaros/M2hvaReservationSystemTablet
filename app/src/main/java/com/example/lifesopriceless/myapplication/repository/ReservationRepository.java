@@ -3,29 +3,19 @@ package com.example.lifesopriceless.myapplication.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Intent;
 import android.util.Log;
 
-import com.example.lifesopriceless.myapplication.utils.DateUtils;
 import com.example.lifesopriceless.myapplication.models.Reservation;
-import com.example.lifesopriceless.myapplication.utils.TimeService;
+import com.example.lifesopriceless.myapplication.utils.DateUtils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
 
 public class ReservationRepository {
     private final FirebaseDatabase database;
     private DatabaseReference myRef;
-
-    private String currentTime;
 
 
     public ReservationRepository() {
@@ -49,12 +39,11 @@ public class ReservationRepository {
                                 snapshot.getValue(Reservation.class).getStartTime(),
                                 snapshot.getValue(Reservation.class).getEndTime())) {
                             data.setValue(snapshot.getValue(Reservation.class));
-
-                        } else {
-                            data.setValue(new Reservation());
+                            return;
                         }
                     }
                 }
+                data.setValue(new Reservation());
             }
 
             @Override
