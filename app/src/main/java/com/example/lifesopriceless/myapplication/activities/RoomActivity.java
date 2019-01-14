@@ -78,6 +78,8 @@ public class RoomActivity extends AppCompatActivity {
                 mRoom = room;
                 setBackgroundImage(room,false);
                 mTextViewTitle.setText(room.getName());
+                mTextViewStatus.setText("Available");
+                mTextViewEndTime.setText("");
 
             }
         });
