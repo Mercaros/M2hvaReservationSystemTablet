@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,8 +23,11 @@ import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.example.lifesopriceless.myapplication.R;
 import com.example.lifesopriceless.myapplication.models.Reservation;
 import com.example.lifesopriceless.myapplication.models.Room;
+import com.example.lifesopriceless.myapplication.utils.DateUtils;
 import com.example.lifesopriceless.myapplication.viewmodel.MainActivityViewModel;
 import com.google.android.gms.common.util.Strings;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +54,9 @@ public class RoomActivity extends AppCompatActivity {
     ImageView mBackground;
 
     Room mRoom;
+    List<Reservation> mReservations;
+    Thread t;
+    volatile boolean execute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +65,7 @@ public class RoomActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         initViewModel();
-
+        currentReservation();
     }
 
     private void initViewModel() {
@@ -69,24 +76,55 @@ public class RoomActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Room room) {
                 mRoom = room;
+                setBackgroundImage(room,false);
                 mTextViewTitle.setText(room.getName());
+
             }
         });
-        viewModel.getRoomStatus().observe(this, new Observer<Reservation>() {
+        viewModel.getReservations().observe(this, new Observer<List<Reservation>>() {
             @Override
-            public void onChanged(@Nullable Reservation reservation) {
-                if (!Strings.isEmptyOrWhitespace(reservation.getId())) {
-                    setBackgroundImage(mRoom, true);
-                    mTextViewStatus.setText("Occupied");
-                    mTextViewEndTime.setText("Until: " + reservation.getEndTime());
-                } else {
-                    setBackgroundImage(mRoom, false);
-                    mTextViewStatus.setText("Available");
-                    mTextViewEndTime.setText("");
-                }
+            public void onChanged(@Nullable List<Reservation> reservations) {
+                mReservations = reservations;
             }
         });
 
+
+    }
+    private void currentReservation() {
+        t = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    execute = true;
+                    while (execute) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (Reservation r : mReservations) {
+                                    if (DateUtils.isNowInInterval(r.getStartTime(), r.getEndTime())) {
+                                        setBackgroundImage(mRoom, true);
+                                        mTextViewStatus.setText("Occupied");
+                                        mTextViewEndTime.setText("Until: " + r.getEndTime());
+                                        return;
+                                    } else {
+                                        setBackgroundImage(mRoom, false);
+                                        mTextViewStatus.setText("Available");
+                                        mTextViewEndTime.setText("");
+                                    }
+                                }
+
+
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        t.start();
     }
 
     private void setBackgroundImage(Room room, Boolean b) {
@@ -175,6 +213,13 @@ public class RoomActivity extends AppCompatActivity {
         cm.postConcat(cmDuoTone);
 
         return new ColorMatrixColorFilter(cm);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.execute = false;
+
     }
 }
 

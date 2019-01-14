@@ -8,29 +8,31 @@ import com.example.lifesopriceless.myapplication.models.Room;
 import com.example.lifesopriceless.myapplication.repository.ReservationRepository;
 import com.example.lifesopriceless.myapplication.repository.RoomRepository;
 
+import java.util.List;
+
 public class MainActivityViewModel extends ViewModel {
 
 
-    private LiveData<Room> room;
-    private LiveData<Reservation> currentReservation;
+    private LiveData<Room> mRoom;
+    private LiveData<List<Reservation>> mReservations;
 
 
     public void init(String roomName) {
-        if (this.room != null) {
+        if (this.mRoom != null) {
             return;
         }
         RoomRepository mRoomRepository = new RoomRepository();
         ReservationRepository mReservationRepository = new ReservationRepository();
 
-        room = mRoomRepository.getRoom(roomName);
-        currentReservation = mReservationRepository.getReservation(roomName);
+        mRoom = mRoomRepository.getRoom(roomName);
+        mReservations = mReservationRepository.getReservations(roomName);
     }
 
     public LiveData<Room> getRoom() {
-        return room;
+        return mRoom;
     }
 
-    public LiveData<Reservation> getRoomStatus() {
-        return currentReservation;
+    public LiveData<List<Reservation>> getReservations() {
+        return mReservations;
     }
 }
