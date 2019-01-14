@@ -13,6 +13,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReservationRepository {
     private final FirebaseDatabase database;
     private DatabaseReference myRef;
@@ -22,28 +25,23 @@ public class ReservationRepository {
         database = FirebaseDatabase.getInstance();
     }
 
-    public LiveData<Reservation> getReservation(final String roomName) {
+    public LiveData<List<Reservation>> getReservations(final String roomName) {
 
         myRef = database.getReference("reservations");
-        final MutableLiveData<Reservation> data = new MutableLiveData<>();
+        final MutableLiveData<List<Reservation>> data = new MutableLiveData<>();
+        final List<Reservation> list = new ArrayList<>();
 
 
         myRef.orderByChild("reservationRoom/name").equalTo(roomName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                list.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (DateUtils.getCurrentDate().equalsIgnoreCase(snapshot.getValue(Reservation.class).getDate())) {
-
-                        if (DateUtils.isHourInInterval(DateUtils.getCurrentHour(),
-                                snapshot.getValue(Reservation.class).getStartTime(),
-                                snapshot.getValue(Reservation.class).getEndTime())) {
-                            data.setValue(snapshot.getValue(Reservation.class));
-                            return;
-                        }
+                        list.add(snapshot.getValue(Reservation.class));
                     }
                 }
-                data.setValue(new Reservation());
+                data.setValue(list);
             }
 
             @Override
